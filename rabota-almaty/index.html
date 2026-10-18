@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>Разместить вакансию</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ctext y=%2790%27 font-size=%2790%27%3E💼%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css">
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<header class="hero">
+  <div class="logo">💼</div>
+  <div>
+    <h1>Подработка и работа | Алматы</h1>
+    <p id="promo" class="sub"></p>
+  </div>
+</header>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="form">Вакансия</button>
+  <button class="tab" data-tab="rules">Правила и цены</button>
+</nav>
+
+<main>
+<section id="menuNotice" class="tabpane notice">
+  <h2>Подать вакансию</h2>
+  <p>Форма отправляется кнопкой в чате с ботом. Нажмите ниже — откроется чат, затем нажмите «Разместить вакансию» внизу экрана.</p>
+  <button type="button" id="toBot" class="primary">Открыть чат с ботом</button>
+</section>
+<form id="form" class="tabpane active" novalidate autocomplete="off">
+  <label class="field" data-f="title"><span>Должность *</span>
+    <input name="title" maxlength="80" placeholder="Например: Бариста" required>
+    <em class="err"></em></label>
+
+  <label class="field" data-f="company"><span>Компания *</span>
+    <input name="company" maxlength="80" placeholder="Название компании или ИП" required>
+    <em class="err"></em></label>
+
+  <div class="field" data-f="salary"><span>Зарплата *</span>
+    <div class="seg">
+      <label><input type="radio" name="salary_mode" value="range" checked><i>От / до</i></label>
+      <label><input type="radio" name="salary_mode" value="negotiable"><i>По договорённости</i></label>
+    </div>
+    <div class="row" id="salaryRange">
+      <input name="salary_from" inputmode="numeric" placeholder="от, ₸">
+      <input name="salary_to" inputmode="numeric" placeholder="до, ₸">
+    </div>
+    <em class="err"></em></div>
+
+  <label class="field" data-f="schedule"><span>График *</span>
+    <input name="schedule" maxlength="60" placeholder="2/2, с 10:00 до 22:00" required>
+    <em class="err"></em></label>
+
+  <label class="field" data-f="district"><span>Район Алматы *</span>
+    <select name="district" required></select>
+    <em class="err"></em></label>
+
+  <label class="field" data-f="description"><span>Описание и обязанности *</span>
+    <textarea name="description" rows="6" placeholder="Что нужно делать, требования, условия"></textarea>
+    <small class="counter"><span id="cnt">0</span>/<span id="max">600</span></small>
+    <em class="err"></em></label>
+
+  <label class="field" data-f="contact"><span>Контакт для откликов *</span>
+    <input name="contact" maxlength="80" placeholder="+7 701 123 45 67 или @username">
+    <em class="err"></em></label>
+
+  <label class="field" data-f="website"><span>Сайт или соцсеть компании *</span>
+    <input name="website" type="url" inputmode="url" maxlength="200" placeholder="https://instagram.com/…">
+    <small class="hint">Нужна только для проверки вакансии модератором.</small>
+    <em class="err"></em></label>
+
+  <div class="field" data-f="tariff"><span>Тариф</span>
+    <div id="tariffs" class="tariffs"></div>
+    <label class="check urgent"><input type="checkbox" name="urgent"><i></i><b id="urgentText">Срочно 🔥</b></label>
+    <div id="sum" class="sum"></div>
+    <em class="err"></em></div>
+
+  <div class="field" data-f="agree">
+    <label class="check"><input type="checkbox" name="agree"><i></i><b>Согласен на обработку данных для публикации вакансии</b></label>
+    <label class="check"><input type="checkbox" name="noprepay"><i></i><b>Подтверждаю: не беру предоплату и деньги с соискателей</b></label>
+    <em class="err"></em></div>
+
+  <button type="submit" id="submit" class="primary">Отправить на модерацию</button>
+  <p class="foot">Вакансия публикуется только после проверки модератором.</p>
+</form>
+
+<section id="rules" class="tabpane">
+  <h2>Правила</h2>
+  <ul>
+    <li>Публикуем только реальные вакансии в Алматы и области.</li>
+    <li>С соискателей нельзя брать деньги: предоплата, «взнос», «обучение за свой счёт» — отказ.</li>
+    <li>Обязательны зарплата (или «по договорённости»), график и рабочий контакт.</li>
+    <li>Не принимаем MLM, пирамиды, крипто-схемы, «работу за лайки», 18+.</li>
+    <li>Модератор может отказать или попросить уточнить. Срок проверки — обычно до суток.</li>
+    <li>Публикации выходят по слотам: 09:00, 13:00, 19:00 (Алматы).</li>
+  </ul>
+  <h2>Цены</h2>
+  <div id="priceList" class="prices"></div>
+  <p class="foot" id="priceNote"></p>
+</section>
+</main>
+<script src="config.js"></script>
+<script src="validate.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
