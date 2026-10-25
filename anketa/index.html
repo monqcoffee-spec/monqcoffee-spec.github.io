@@ -133,25 +133,42 @@ svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2;stroke-l
 
 <!-- FORM -->
 <section class="screen" id="s-form">
- <div class="top st"><div><div class="sub" id="stepLbl">Шаг 1 из 4</div><h1 class="h1">Анкета</h1></div><span class="badge">18+</span></div>
- <div class="prog st"><i id="progBar" style="width:25%"></i></div>
+ <div class="top st"><div><div class="sub" id="stepLbl">Шаг 1 из 7</div><h1 class="h1">Анкета</h1></div><span class="badge">18+</span></div>
+ <div class="prog st"><i id="progBar" style="width:14%"></i></div>
  <div class="st">
- <div class="step on" data-s="1"><p class="q">Кто вы?</p><div class="qs">Хозяин читает каждую анкету лично. Строго конфиденциально.</div>
+ <div class="step on" data-s="1"><p class="q">Добро пожаловать</p><div class="qs">Клуб только для взрослых. Анкету читает лично хозяин, данные строго конфиденциальны. Поля со звёздочкой * обязательны.</div>
+  <label class="chk"><input type="checkbox" id="adult"><span>Мне (нам обоим) исполнилось 18 лет *</span></label>
+  <label class="chk"><input type="checkbox" id="rules"><span>Согласен(на) с правилами клуба: добровольное согласие, уважение, конфиденциальность *</span></label>
+  <label class="chk"><input type="checkbox" id="pd"><span>Согласен(на) на обработку данных анкеты для модерации и подбора *</span></label>
+  <div class="qs" style="margin-top:12px">⚠️ Запрещено загружать откровенные фото — такие анкеты отклоняются.</div></div>
+ <div class="step" data-s="2"><p class="q">Кто вы? *</p><div class="qs">Для пары заполним данные обоих партнёров.</div>
   <div class="chips big" data-name="who" data-single>
-   <div class="chip" data-v="pair">Пара <small>вдвоём</small></div><div class="chip" data-v="girl">Девушка <small>одна</small></div><div class="chip" data-v="man">Мужчина <small>один</small></div></div></div>
- <div class="step" data-s="2"><p class="q">Город и возраст</p><div class="qs">Только 18+, без исключений.</div>
+   <div class="chip" data-v="mf">Пара М+Ж</div><div class="chip" data-v="ff">Пара Ж+Ж</div><div class="chip" data-v="mm">Пара М+М</div>
+   <div class="chip" data-v="f">Девушка <small>одна</small></div><div class="chip" data-v="m">Мужчина <small>один</small></div><div class="chip" data-v="o">Другое</div></div>
+  <input type="text" id="who_o" maxlength="40" placeholder="Уточните, кто вы *" style="margin-top:10px;display:none"></div>
+ <div class="step" data-s="3"><p class="q">О партнёрах</p><div class="qs">Имя можно указать вымышленное — ник.</div><div id="partners"></div></div>
+ <div class="step" data-s="4"><p class="q">Город *</p><div class="qs">Где вы обычно бываете.</div>
   <div class="chips" data-name="city" data-single><div class="chip" data-v="Алматы">Алматы</div><div class="chip" data-v="Астана">Астана</div><div class="chip" data-v="Шымкент">Шымкент</div><div class="chip" data-v="other">Другой</div></div>
-  <input type="text" id="city_other" placeholder="Ваш город" maxlength="40" style="margin-top:10px;display:none">
-  <div class="lbl">Возраст</div><div class="r2"><input type="number" inputmode="numeric" id="age1" min="18" max="99" placeholder="Ваш"><input type="number" inputmode="numeric" id="age2" min="18" max="99" placeholder="Партнёра" style="display:none"></div></div>
- <div class="step" data-s="3"><p class="q">Кого ищете?</p><div class="qs">Можно выбрать несколько.</div>
-  <div class="chips" data-name="seek"><div class="chip" data-v="Пару">Пару</div><div class="chip" data-v="Девушку">Девушку</div><div class="chip" data-v="Мужчину">Мужчину</div></div>
-  <div class="lbl">Формат</div><div class="chips" data-name="format"><div class="chip" data-v="Вечеринки">Вечеринки</div><div class="chip" data-v="Знакомство пар">Знакомство пар</div><div class="chip" data-v="Общение онлайн">Общение онлайн</div><div class="chip" data-v="Встречи в ресторане">Встречи в ресторане</div><div class="chip" data-v="Путешествия">Путешествия</div></div></div>
- <div class="step" data-s="4"><p class="q">О себе</p><div class="qs">Без откровенностей — интрига ценнее.</div>
-  <textarea id="about" maxlength="500" placeholder="Характер, увлечения, чего ждёте от клуба"></textarea><div class="sub" style="text-align:right;margin-top:4px"><span id="cnt">0</span>/500</div>
-  <div class="lbl">Контакт для связи</div><input type="text" id="contact" maxlength="64" placeholder="@username">
-  <label class="chk"><input type="checkbox" id="showc"><span>Показывать контакт в публикации (иначе — через хозяина)</span></label>
-  <label class="chk"><input type="checkbox" id="adult"><span>Мне (нам) исполнилось 18 лет</span></label>
-  <label class="chk"><input type="checkbox" id="rules"><span>Согласен(на) с правилами: согласие, уважение, конфиденциальность</span></label></div>
+  <input type="text" id="city_other" placeholder="Ваш город *" maxlength="40" style="margin-top:10px;display:none">
+  <div class="lbl">Готовность к поездкам</div><div class="chips" data-name="tr" data-single><div class="chip" data-v="0">Только свой город</div><div class="chip" data-v="1">По Казахстану</div><div class="chip" data-v="2">И за рубеж</div></div></div>
+ <div class="step" data-s="5"><p class="q">Знакомства</p><div class="qs">Можно выбрать несколько вариантов.</div>
+  <div class="lbl">Кого ищете *</div><div class="chips" data-name="seek"><div class="chip" data-v="mf">Пару М+Ж</div><div class="chip" data-v="ff">Пару Ж+Ж</div><div class="chip" data-v="f">Девушку</div><div class="chip" data-v="m">Мужчину</div><div class="chip" data-v="pt">Компанию / вечеринку</div></div>
+  <div class="lbl">Формат встреч *</div><div class="chips" data-name="fmt"><div class="chip" data-v="talk">Общение и знакомство</div><div class="chip" data-v="fun">Досуг и вечеринки</div><div class="chip" data-v="soft">Мягкий своп</div><div class="chip" data-v="full">Полный своп</div><div class="chip" data-v="near">Рядом, без обмена</div><div class="chip" data-v="fmf">ЖМЖ</div><div class="chip" data-v="mfm">МЖМ</div><div class="chip" data-v="grp">Групповые встречи</div><div class="chip" data-v="onl">Только онлайн</div></div>
+  <div class="lbl">Где удобно встречаться</div><div class="chips" data-name="pl"><div class="chip" data-v="home">У себя</div><div class="chip" data-v="their">У партнёров</div><div class="chip" data-v="hotel">Отель / апартаменты</div><div class="chip" data-v="club">Клуб / вечеринки</div><div class="chip" data-v="disc">Обсуждаем</div></div>
+  <div class="lbl">Когда удобно</div><div class="chips" data-name="when"><div class="chip" data-v="wd">Будни</div><div class="chip" data-v="we">Выходные</div><div class="chip" data-v="ev">Вечер</div><div class="chip" data-v="day">Днём</div></div>
+  <div class="lbl">Как часто</div><div class="chips" data-name="fr" data-single><div class="chip" data-v="r">Изредка</div><div class="chip" data-v="m">Раз в месяц</div><div class="chip" data-v="w">Чаще</div><div class="chip" data-v="x">По настроению</div></div></div>
+ <div class="step" data-s="6"><p class="q">Границы и безопасность *</p><div class="qs">Ваши правила уважаются без обсуждений.</div>
+  <label class="chk"><input type="checkbox" id="safe"><span>Только с защитой — безопасность обязательна *</span></label>
+  <div class="lbl">Дополнительно</div><div class="chips" data-name="lim"><div class="chip" data-v="alc">Без алкоголя</div><div class="chip" data-v="pic">Без фото и видео</div><div class="chip" data-v="kis">Без поцелуев</div><div class="chip" data-v="smk">Без курения</div><div class="chip" data-v="slow">Сначала знакомство</div><div class="chip" data-v="disc">Только дискретно</div></div>
+  <div class="lbl">Ваши табу и пожелания</div><textarea id="tabu" maxlength="300" style="min-height:90px" placeholder="Что для вас недопустимо"></textarea>
+  <div class="lbl">Отношение к здоровью</div><div class="chips" data-name="hl" data-single><div class="chip" data-v="cert">Обмениваемся свежими справками</div><div class="chip" data-v="ok">Готовы по запросу</div><div class="chip" data-v="talk">Обсуждаем лично</div></div></div>
+ <div class="step" data-s="7"><p class="q">Публикация и о себе</p><div class="qs">Без откровенностей — интрига ценнее.</div>
+  <div class="lbl">Фото в канале</div><div class="chips" data-name="ph" data-single><div class="chip" data-v="no">Без фото</div><div class="chip" data-v="closed">Лицо закрыто</div><div class="chip" data-v="open">Лицо открыто</div></div>
+  <label class="chk"><input type="checkbox" id="pub" checked><span>Можно опубликовать анкету в канале клуба (после одобрения хозяина)</span></label>
+  <div class="lbl">О себе</div><textarea id="about" maxlength="500" placeholder="Характер, увлечения, чего ждёте от клуба"></textarea><div class="sub" style="text-align:right;margin-top:4px"><span id="cnt">0</span>/500</div>
+  <div class="lbl">Пожелания к партнёрам</div><textarea id="wish" maxlength="300" style="min-height:80px" placeholder="Возраст, характер, атмосфера встреч"></textarea>
+  <div class="lbl">Контакт для связи</div><input type="text" id="contact" maxlength="64" placeholder="@username (видит только хозяин)">
+  <label class="chk"><input type="checkbox" id="showc"><span>Показывать @username в публикации (по умолчанию — связь через бота). Телефоны не публикуются.</span></label></div>
  <div class="err" id="err"></div>
  <div class="nav"><button class="pill" id="back" style="display:none">Назад</button><button class="pill w" id="next">Далее</button></div>
  </div>
@@ -269,34 +286,56 @@ $$('#fCity .chip').forEach(c=>c.onclick=()=>{$$('#fCity .chip').forEach(x=>x.cla
 $('#fApply').onclick=()=>{closeSheet();go('feed');renderFeed()};
 
 /* ---------- form ---------- */
-const st={who:null,city:null,seek:[],format:[]};let step=1;
-$$('#s-form .chips').forEach(g=>{const n=g.dataset.name,single=g.hasAttribute('data-single');
- g.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{const v=c.dataset.v;hap();
-  if(single){g.querySelectorAll('.chip').forEach(x=>x.classList.remove('on'));c.classList.add('on');st[n]=v}
-  else{c.classList.toggle('on');st[n]=[...g.querySelectorAll('.on')].map(x=>x.dataset.v)}
-  if(n==='who'){$('#age2').style.display=v==='pair'?'':'none';if(!RM)setTimeout(()=>step===1&&nextStep(),280)}
-  if(n==='city')$('#city_other').style.display=v==='other'?'':'none';$('#err').textContent=''})});
-$('#about').oninput=e=>$('#cnt').textContent=e.target.value.length;
+const N=7,st={who:null,city:null,tr:null,seek:[],fmt:[],pl:[],when:[],fr:null,lim:[],hl:null,ph:'no'};let step=1;
+const PAIR={mf:['Он','Она'],ff:['Она','Она'],mm:['Он','Он']};
+function bindChips(root){root.querySelectorAll('.chips').forEach(g=>{if(g._b)return;g._b=1;const n=g.dataset.name,single=g.hasAttribute('data-single'),obj=g.closest('[data-pi]');
+ g.querySelectorAll('.chip').forEach(c=>c.onclick=()=>{const v=c.dataset.v;hap();const tgt=obj?obj._d:st;
+  if(single){g.querySelectorAll('.chip').forEach(x=>x!==c&&x.classList.remove('on'));c.classList.toggle('on');tgt[n]=c.classList.contains('on')?v:null}
+  else{c.classList.toggle('on');tgt[n]=[...g.querySelectorAll('.on')].map(x=>x.dataset.v)}
+  if(n==='who'){$('#who_o').style.display=v==='o'?'':'none';renderPartners()}
+  if(n==='city')$('#city_other').style.display=st.city==='other'?'':'none';$('#err').textContent=''})})}
+const OPT={b:[['sl','Стройное'],['av','Среднее'],['sp','Спортивное'],['cu','Пышное']],o:[['het','Гетеро'],['bi','Би'],['bic','Бикьюриос'],['hom','Гомо'],['pan','Пан'],['oth','Другое']],
+ sm:[['n','Не курю'],['s','Иногда'],['y','Курю']],ex:[['new','Новички'],['some','Есть опыт'],['pro','Опытные']]};
+const opts=(k,single=1)=>`<div class="chips" data-name="${k}"${single?' data-single':''}>${OPT[k].map(([v,t])=>`<div class="chip" data-v="${v}">${t}</div>`).join('')}</div>`;
+let PD=[{},{}];
+function renderPartners(){const w=$('#partners'),lab=PAIR[st.who]||[''];w.innerHTML=lab.map((l,i)=>`<div data-pi="${i}" style="margin-bottom:18px">
+ ${lab.length>1?`<div class="lbl" style="font-size:17px">Партнёр ${i+1}${l?' — '+l:''}</div>`:''}
+ <div class="r2"><input type="text" class="pn" maxlength="24" placeholder="Имя или ник *"><input type="number" class="pa" inputmode="numeric" min="18" max="99" placeholder="Возраст *"></div>
+ <div class="lbl">Ориентация *</div>${opts('o')}
+ <div class="lbl">Рост, см</div><input type="number" class="ph" inputmode="numeric" min="140" max="220" placeholder="Например, 170">
+ <div class="lbl">Телосложение</div>${opts('b')}<div class="lbl">Курение</div>${opts('sm')}<div class="lbl">Опыт в свинге</div>${opts('ex')}</div>`).join('');
+ PD=lab.map(()=>({}));$$('#partners [data-pi]').forEach((e,i)=>e._d=PD[i]);bindChips(w)}
+bindChips($('#s-form'));$('#about').oninput=e=>$('#cnt').textContent=e.target.value.length;
 function err(m){$('#err').textContent=m;hap('heavy');try{tg&&tg.HapticFeedback.notificationOccurred('error')}catch(e){}return false}
+function partners(){return $$('#partners [data-pi]').map((e,i)=>({n:e.querySelector('.pn').value.trim().slice(0,24),a:+e.querySelector('.pa').value,h:+e.querySelector('.ph').value||null,o:PD[i].o||null,b:PD[i].b||null,sm:PD[i].sm||null,ex:PD[i].ex||null}))}
 function valid(s){const g=id=>document.getElementById(id);
- if(s===1&&!st.who)return err('Выберите, кто вы');
- if(s===2){const city=st.city==='other'?g('city_other').value.trim():st.city;if(!city)return err('Укажите город');
-  const a1=+g('age1').value,a2=+g('age2').value;if(!(a1>=18&&a1<100))return err('Возраст — от 18 лет');if(st.who==='pair'&&!(a2>=18&&a2<100))return err('Возраст партнёра — от 18 лет')}
- if(s===3){if(!st.seek.length)return err('Кого вы ищете?');if(!st.format.length)return err('Выберите формат')}
- if(s===4&&!(g('adult').checked&&g('rules').checked))return err('Подтвердите 18+ и согласие с правилами');
+ if(s===1){if(!g('adult').checked)return err('Клуб только для лиц старше 18 лет');if(!g('rules').checked)return err('Подтвердите согласие с правилами клуба');if(!g('pd').checked)return err('Нужно согласие на обработку данных')}
+ if(s===2){if(!st.who)return err('Выберите, кто вы');if(st.who==='o'&&!g('who_o').value.trim())return err('Уточните, кто вы')}
+ if(s===3){const ps=partners(),k=ps.length>1;for(let i=0;i<ps.length;i++){const p=ps[i],w=k?` (партнёр ${i+1})`:'';
+  if(!p.n)return err('Укажите имя или ник'+w);if(!p.a)return err('Укажите возраст'+w);if(p.a<18)return err('Участие только с 18 лет'+w+' — анкета не может быть принята');if(p.a>99)return err('Проверьте возраст'+w);
+  if(!p.o)return err('Выберите ориентацию'+w);if(p.h&&(p.h<130||p.h>230))return err('Проверьте рост'+w)}}
+ if(s===4){if(!st.city)return err('Выберите город');if(st.city==='other'&&!g('city_other').value.trim())return err('Впишите ваш город')}
+ if(s===5){if(!st.seek.length)return err('Отметьте, кого вы ищете');if(!st.fmt.length)return err('Выберите хотя бы один формат встреч')}
+ if(s===6&&!g('safe').checked)return err('Отметьте пункт о безопасности — это обязательное правило клуба');
+ if(s===7&&/\+?\d[\d\s()-]{8,}/.test(g('about').value+g('wish').value))return err('Не указывайте телефоны в тексте — связь идёт через бота');
  $('#err').textContent='';return true}
-function showStep(){$$('.step').forEach(s=>s.classList.toggle('on',+s.dataset.s===step));$('#progBar').style.width=step*25+'%';$('#stepLbl').textContent=`Шаг ${step} из 4`;
- $('#back').style.display=step>1?'':'none';$('#next').textContent=step<4?'Далее':'Отправить хозяину';updMain()}
-function nextStep(){if(!valid(step))return;if(step<4){step++;showStep();hap('light')}else submit()}
+function showStep(){$$('.step').forEach(s=>s.classList.toggle('on',+s.dataset.s===step));$('#progBar').style.width=Math.round(step/N*100)+'%';$('#stepLbl').textContent=`Шаг ${step} из ${N}`;
+ $('#back').style.display=step>1?'':'none';$('#next').textContent=step<N?'Далее':'Отправить хозяину';updMain();scrollTo(0,0)}
+function nextStep(){if(!valid(step))return;if(step<N){step++;showStep();hap('light')}else submit()}
 $('#next').onclick=nextStep;$('#back').onclick=()=>{step--;showStep()};
-function submit(){const g=id=>document.getElementById(id);for(let s=1;s<=4;s++)if(!valid(s)){step=s;showStep();return}
- const d={v:1,who:st.who,city:st.city==='other'?g('city_other').value.trim():st.city,age1:+g('age1').value,age2:st.who==='pair'?+g('age2').value:null,
- seek:st.seek,format:st.format,about:g('about').value.trim().slice(0,500),contact:g('contact').value.trim().slice(0,64),show_contact:g('showc').checked,adult:true,rules:true};
- if(canSend&&tg.sendData){tg.sendData(JSON.stringify(d))}
+function payload(){const g=id=>document.getElementById(id),ps=partners(),cl=o=>{for(const k in o)if(o[k]===null||o[k]===''||(Array.isArray(o[k])&&!o[k].length))delete o[k];return o};
+ return cl({v:2,who:st.who,wo:st.who==='o'?g('who_o').value.trim().slice(0,40):null,p:ps.map(cl),city:st.city==='other'?g('city_other').value.trim().slice(0,40):st.city,tr:st.tr,
+ seek:st.seek,fmt:st.fmt,pl:st.pl,when:st.when,fr:st.fr,safe:1,lim:st.lim,tabu:g('tabu').value.trim().slice(0,300),hl:st.hl,ph:st.ph,pub:g('pub').checked?1:0,
+ about:g('about').value.trim().slice(0,500),wish:g('wish').value.trim().slice(0,300),contact:g('contact').value.trim().slice(0,64),showc:g('showc').checked?1:0,adult:1,rules:1,pd:1,
+ age1:ps[0]&&ps[0].a,age2:ps[1]?ps[1].a:null})}
+function submit(){for(let s=1;s<=N;s++)if(!valid(s)){step=s;showStep();return}
+ const d=payload(),j=JSON.stringify(d);window.__last=j;
+ if(new Blob([j]).size>4096)return err('Анкета слишком длинная — сократите тексты');
+ if(canSend&&tg.sendData){tg.sendData(j)}
  else if(tg&&tg.initDataUnsafe&&tg.initDataUnsafe.query_id){toast('Откройте анкету кнопкой /anketa в чате с ботом')}
  else{$('#s-form .st:last-child').innerHTML='<div class="done"><div class="ic">🥂</div><p class="q">Готово</p><div class="qs">Откройте приложение через бота, чтобы отправить анкету хозяину.</div></div>'}}
 function updMain(){if(!tg||!tg.MainButton||!canSend)return;const M=tg.MainButton;
- if(cur==='form'){M.setParams({text:step<4?'ДАЛЕЕ':'ОТПРАВИТЬ ХОЗЯИНУ',color:'#7B2FF7',text_color:'#ffffff'});M.show();$('.nav').style.display='none'}else M.hide()}
+ if(cur==='form'){M.setParams({text:step<N?'ДАЛЕЕ':'ОТПРАВИТЬ ХОЗЯИНУ',color:'#7B2FF7',text_color:'#ffffff'});M.show();$('.nav').style.display='none'}else M.hide()}
 if(tg&&tg.MainButton)tg.MainButton.onClick(()=>cur==='form'&&nextStep());
 
 /* ---------- card & profile (params from bot) ---------- */
