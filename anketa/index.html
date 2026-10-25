@@ -26,7 +26,15 @@ textarea{min-height:110px;resize:vertical}.row{display:flex;gap:10px}.row>div{fl
 .chk{display:flex;gap:10px;align-items:flex-start;margin:8px 0;font-size:14px}.chk input{accent-color:var(--gold);width:18px;height:18px}
 #send{display:none;width:100%;padding:14px;margin-top:10px;border:0;background:linear-gradient(180deg,var(--gold2),var(--gold));color:#2a0710;font-weight:600;font-size:16px}
 .err{color:#ff9b9b;font-size:13px;min-height:18px;text-align:center}.hidden{display:none}
+.tabs{display:flex;gap:0;margin:10px 0}.tab{flex:1;text-align:center;padding:10px;border:1px solid rgba(212,175,55,.5);cursor:pointer;font-family:'Playfair Display',Georgia,serif;color:var(--gold2)}
+.tab.on{background:linear-gradient(180deg,var(--gold2),var(--gold));color:#2a0710}
+.lc{aspect-ratio:1.586;border:3px double var(--gold);padding:18px;background:linear-gradient(160deg,#5a1020,#1a0509);position:relative;margin-top:14px}
+.lc h2{font-family:'Playfair Display',Georgia,serif;color:var(--gold2);text-align:center;margin:0;font-size:20px;letter-spacing:2px}
+.lc .no{font-family:'Playfair Display',Georgia,serif;font-size:34px;color:var(--gold2);margin-top:12px}.lc .ln{font-size:14px;margin:4px 0}
+.lc img{position:absolute;right:16px;bottom:16px;width:30%;border:2px solid var(--gold)}.kv{font-size:14px;margin:6px 0}.kv b{color:var(--gold2)}
 </style></head><body><div class="wrap">
+<div class="tabs"><div class="tab on" data-t="form">Анкета</div><div class="tab" data-t="card">Моя карта</div></div>
+<div id="v-card" class="hidden"></div><div id="v-form">
 <div class="deco"></div><h1>Анкета гостя</h1><div class="sub">Хозяин клуба читает каждую лично. Строго конфиденциально.</div><span class="badge">18+</span><div class="deco"></div>
 <div class="card"><label class="t">Кто вы</label><div class="chips" data-name="who" data-single>
 <span class="chip" data-v="pair">Пара</span><span class="chip" data-v="girl">Девушка</span><span class="chip" data-v="man">Мужчина</span></div></div>
@@ -45,7 +53,7 @@ textarea{min-height:110px;resize:vertical}.row{display:flex;gap:10px}.row>div{fl
 <div class="card"><div class="chk"><input type="checkbox" id="adult"><span>Мне (нам) исполнилось 18 лет</span></div>
 <div class="chk"><input type="checkbox" id="rules"><span>Согласен(на) с правилами клуба: согласие, уважение, конфиденциальность</span></div></div>
 <div class="err" id="err"></div><button id="send">Отправить хозяину</button>
-</div><script>
+</div></div><script>
 const tg=window.Telegram&&Telegram.WebApp;const st={who:null,city:null,seek:[],format:[]};
 if(tg){tg.ready();tg.expand();try{tg.setHeaderColor('#2a0710');tg.setBackgroundColor('#14060a')}catch(e){}
  const tp=tg.themeParams||{};if(tp.button_color)document.documentElement.style.setProperty('--accent',tp.button_color);
@@ -69,4 +77,16 @@ function collect(){const g=id=>document.getElementById(id);const e=m=>{g('err').
 function submit(){const d=collect();if(!d)return;if(tg&&tg.sendData){tg.sendData(JSON.stringify(d))}else{alert(JSON.stringify(d,null,1))}}
 if(tg&&tg.MainButton&&tg.initData!==undefined&&tg.platform!=='unknown'){tg.MainButton.setParams({text:'ОТПРАВИТЬ ХОЗЯИНУ',color:'#d4af37',text_color:'#2a0710'});tg.MainButton.show();tg.MainButton.onClick(submit)}
 else{const b=document.getElementById('send');b.style.display='block';b.onclick=submit}
+
+const P=new URLSearchParams(location.search),esc=x=>String(x||'').replace(/[&<>"]/g,c=>({'&':'&','<':'<','>':'>','"':'"'}[c]));
+const vc=document.getElementById('v-card');
+if(P.get('no')){const r=P.get('ref')||'';vc.innerHTML=`<div class="lc"><h2>СВИНГ-КЛУБ KZ 18+</h2><div class="small" style="text-align:center">КАРТА ГОСТЯ</div>
+<div class="no">${esc(P.get('no'))}</div><div class="ln">Уровень: ${esc(P.get('lvl'))}</div><div class="ln">Статус: ${esc(P.get('st'))}</div><div class="ln">Баллы: ${esc(P.get('pts'))}</div>
+<div class="small">С нами с ${esc(P.get('since'))}</div><img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&color=2a0710&bgcolor=f3d77a&data=${encodeURIComponent(r)}"></div>
+<div class="card"><div class="kv">Приглашено друзей: <b>${esc(P.get('refs'))}</b></div><div class="kv">Публикации сегодня: <b>${esc(P.get('left'))} из ${esc(P.get('lim'))}</b></div>
+<div class="kv">Ваша ссылка: <b style="word-break:break-all">${esc(r)}</b></div><div class="small">Уровни: Гость → Серебро (300) → Золото (700) → Платина (1500). Друг +200, анкета +50, фото +20, /bonus +10.</div></div>`}
+else vc.innerHTML='<div class="card" style="text-align:center">Ваша карта гостя хранится у хозяина.<br>Отправьте боту команду <b>/card</b> — и откройте её отсюда. 🗝</div>';
+function show(t){document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x.dataset.t===t));vc.classList.toggle('hidden',t!=='card');
+document.getElementById('v-form').classList.toggle('hidden',t!=='form');if(tg&&tg.MainButton&&document.getElementById('send').style.display!=='block')t==='form'?tg.MainButton.show():tg.MainButton.hide()}
+document.querySelectorAll('.tab').forEach(x=>x.onclick=()=>show(x.dataset.t));if(P.get('tab')==='card')show('card');
 </script></body></html>
