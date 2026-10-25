@@ -197,7 +197,7 @@ const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&','<':'<','>':'>','"':'"'}[c]));
 const P=new URLSearchParams(location.search), H=new URLSearchParams(location.hash.slice(1));
-const WHO={pair:'Пара',girl:'Девушка',man:'Мужчина'};
+const WHO={pair:'Пара',girl:'Девушка',man:'Мужчина'},RU={pair:'пару',girl:'девушку',man:'мужчину',couple:'пару',party:'вечеринки',parties:'вечеринки',meet:'знакомство пар',online:'общение онлайн',dinner:'встречи в ресторане',restaurant:'встречи в ресторане',travel:'путешествия',other:'другой город'},ru=v=>RU[String(v).toLowerCase()]||String(v);
 const canSend=!!(tg&&tg.initData!==undefined&&tg.platform&&tg.platform!=='unknown'&&!(tg.initDataUnsafe&&tg.initDataUnsafe.query_id));
 if(tg){tg.ready();tg.expand();try{tg.setHeaderColor('#000000');tg.setBackgroundColor('#000000');tg.setBottomBarColor&&tg.setBottomBarColor('#000000')}catch(e){}
  const u=tg.initDataUnsafe&&tg.initDataUnsafe.user;if(u&&u.username)$('#contact').value='@'+u.username;}
@@ -239,7 +239,7 @@ function renderFeed(){const W=$('#feedWrap'),L=feedList();$('#feedCount').textCo
  W.innerHTML='<div class="stack" id="stack"></div><div class="sub" style="text-align:center;margin-top:12px">Смахните карточку · нажмите, чтобы раскрыть</div>';
  const S=$('#stack');L.slice().reverse().forEach((a,i)=>{const d=document.createElement('div');d.className='fc';d.dataset.n=a.n;
   d.innerHTML=`<div class="art" style="background:${art(a.n)}"></div><div class="shade"></div><div class="tl">${a.new?'<span class="badge">NEW</span>':''}${a.g?'<span class="badge">⭐ Золото</span>':''}</div><div class="num">#${String(a.n).padStart(3,'0')}</div>
-  <div class="info"><div class="nm">${WHO[a.w]||'Гость'}, ${esc(ages(a))}</div><div class="meta">${esc(a.c)} · ищут ${esc((a.s||[]).join(', ').toLowerCase())}</div>
+  <div class="info"><div class="nm">${WHO[a.w]||'Гость'}, ${esc(ages(a))}</div><div class="meta">${esc(a.c)} · ищут ${esc((a.s||[]).map(ru).join(', ').toLowerCase())}</div>
   ${a.t?`<div class="txt">${esc(a.t)}</div>`:''}<div class="row"><button class="pill w wr">✉ Написать через хозяина</button></div></div>`;
   d._a=a;S.appendChild(d)});layoutStack();bindTop()}
 function layoutStack(){const cs=[...$('#stack').children].reverse();cs.forEach((c,i)=>{c.style.zIndex=100-i;c.style.transform=i?`translateY(${Math.min(i,2)*-14}px) scale(${i===1?.9:.84})`:'none';c.style.opacity=i>2?0:i===2?.5:1;c.style.filter=i?'brightness(.6)':'none'})}
@@ -257,7 +257,7 @@ function hero(c){const a=c._a,r=c.getBoundingClientRect(),h=$('#hero');hap('ligh
  h.querySelector('.art').style.background=art(a.n);
  $('#heroBody').innerHTML=`<div class="sub">#${String(a.n).padStart(3,'0')} ${a.g?'<span class="badge">⭐ Золото</span>':''}</div><div class="h1" style="margin:6px 0">${WHO[a.w]||'Гость'}, ${esc(ages(a))}</div>
  <div class="sub">${esc(a.c)}</div><div class="lbl">Ищут</div><div class="tags">${(a.s||[]).map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div>
- <div class="lbl">Формат</div><div class="tags">${(a.f||[]).map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div>
+ <div class="lbl">Формат</div><div class="tags">${(a.f||[]).map(x=>`<span class="tag">${esc(ru(x))}</span>`).join('')}</div>
  ${a.t?`<div class="lbl">О себе</div><div style="color:#ddd;line-height:1.5">${esc(a.t)}</div>`:''}
  <div class="nav"><button class="pill v" id="hW" style="flex:1;justify-content:center;padding:15px">✉ Написать через хозяина</button></div>`;
  $('#hW').onclick=()=>openBot('write_'+a.n);
